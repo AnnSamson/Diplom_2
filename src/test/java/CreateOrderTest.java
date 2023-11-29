@@ -6,6 +6,7 @@ import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.Response;
 import methods.Order;
 import org.junit.Test;
+
 import java.util.List;
 
 import static org.apache.http.HttpStatus.*;
@@ -13,7 +14,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
 
 @DisplayName("Тесты создания заказа")
-public class CreateOrderTest extends BaseTest{
+public class CreateOrderTest extends BaseTest {
     @DisplayName("Создание заказа с авторизацией с ингредиентами")
     @Test
     public void checkCreateOrderWithAuthAndIngredients() {

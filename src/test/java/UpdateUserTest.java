@@ -7,7 +7,7 @@ import static org.apache.http.HttpStatus.SC_UNAUTHORIZED;
 import static org.hamcrest.Matchers.equalTo;
 
 @DisplayName("Тесты изменения данных пользователя")
-public class UpdateUserTest extends BaseTest{
+public class UpdateUserTest extends BaseTest {
     @DisplayName("Изменение данных пользователя с авторизацией")
     @Test
     public void checkUpdateUserWithAuth() {
@@ -21,10 +21,10 @@ public class UpdateUserTest extends BaseTest{
         updateUser
                 .then()
                 .assertThat()
+                .statusCode(SC_OK)
                 .body("success", equalTo(true))
                 .body("user.email", equalTo(userData.getEmail()))
-                .body("user.name", equalTo(userData.getName()))
-                .statusCode(SC_OK);
+                .body("user.name", equalTo(userData.getName()));
     }
 
     @DisplayName("Изменение данных пользователя без авторизации")
@@ -40,8 +40,8 @@ public class UpdateUserTest extends BaseTest{
         user.updateUser("no_token", userData)
                 .then()
                 .assertThat()
+                .statusCode(SC_UNAUTHORIZED)
                 .body("success", equalTo(false))
-                .body("message", equalTo("You should be authorised"))
-                .statusCode(SC_UNAUTHORIZED);
+                .body("message", equalTo("You should be authorised"));
     }
 }

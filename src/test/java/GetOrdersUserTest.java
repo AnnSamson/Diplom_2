@@ -7,7 +7,7 @@ import static org.apache.http.HttpStatus.SC_UNAUTHORIZED;
 import static org.hamcrest.Matchers.*;
 
 @DisplayName("Тесты получения списка заказов конкретного пользователя")
-public class GetOrdersUserTest extends BaseTest{
+public class GetOrdersUserTest extends BaseTest {
     @DisplayName("Получение заказов авторизованного пользователя")
     @Test
     public void checkGetOrdersWithAuth() {

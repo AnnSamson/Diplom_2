@@ -10,11 +10,12 @@ public class BaseTest {
     String bearerToken;
 
     @Before
-    public void setUp(){
+    public void setUp() {
         RestAssured.baseURI = "https://stellarburgers.nomoreparties.site";
         userData = new UserData();
         user = new User();
     }
+
     @After
     public void deleteUser() {
         user.deleteUser(bearerToken);

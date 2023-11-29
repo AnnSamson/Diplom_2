@@ -9,7 +9,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
 
 @DisplayName("Тесты авторизации пользователя")
-public class LoginUserTest extends BaseTest{
+public class LoginUserTest extends BaseTest {
     @DisplayName("Авторизация существующего пользователя")
     @Test
     public void checkLoginUser() {
@@ -22,12 +22,12 @@ public class LoginUserTest extends BaseTest{
         response
                 .then()
                 .assertThat()
+                .statusCode(SC_OK)
                 .body("success", equalTo(true))
                 .body("user.email", equalTo(userData.getEmail()))
                 .body("user.name", equalTo(userData.getName()))
                 .body("accessToken", notNullValue())
-                .body("refreshToken", notNullValue())
-                .statusCode(SC_OK);
+                .body("refreshToken", notNullValue());
 
         bearerToken = response.then().extract().path("accessToken");
     }
@@ -44,10 +44,9 @@ public class LoginUserTest extends BaseTest{
         user.loginUser(json.toString())
                 .then()
                 .assertThat()
+                .statusCode(SC_UNAUTHORIZED)
                 .body("success", equalTo(false))
-                .body("message", equalTo("email or password are incorrect"))
-                .statusCode(SC_UNAUTHORIZED);
-
+                .body("message", equalTo("email or password are incorrect"));
     }
 
     @DisplayName("Авторизация с неверным паролем")
@@ -63,8 +62,8 @@ public class LoginUserTest extends BaseTest{
         user.loginUser(json.toString())
                 .then()
                 .assertThat()
+                .statusCode(SC_UNAUTHORIZED)
                 .body("success", equalTo(false))
-                .body("message", equalTo("email or password are incorrect"))
-                .statusCode(SC_UNAUTHORIZED);
+                .body("message", equalTo("email or password are incorrect"));
     }
 }
